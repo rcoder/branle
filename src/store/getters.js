@@ -1,4 +1,4 @@
-import Identicon from 'identicon.js'
+import Sprite from 'sprite'
 
 export function namedProfiles(state, getters) {
   return Object.entries(state.profilesCache).reduce(
@@ -37,7 +37,7 @@ export function isVerifiedNIP05(state) {
 export function avatar(state) {
   return pubkey => {
     let {
-      picture = 'data:image/png;base64,' + new Identicon(pubkey, 40).toString()
+      picture = Sprite.generate(pubkey).magnify(8).asDataUri()
     } = state.profilesCache[pubkey] || {}
     return picture
   }

@@ -7,7 +7,7 @@
       <div class="text-lg p-4">Profile</div>
       <q-input v-model="metadata.name" filled type="text" label="Name">
         <template #before>
-          <q-icon name="alternate_email" />
+          <q-icon name="las la-at" />
         </template>
       </q-input>
       <q-input
@@ -51,7 +51,7 @@
                 round
                 flat
                 color="negative"
-                icon="cancel"
+                icon="las la-times-circle"
                 size="xs"
                 :disable="!$store.getters.canSignEventsAutomatically"
                 @click="removeRelay(url)"
@@ -141,7 +141,7 @@
       <q-card class="px-4 py-2">
         <q-card-section>
           <div class="text-lg text-bold tracking-wide leading-relaxed py-2">
-            Your keys <q-icon name="vpn_key" />
+            Your keys <q-icon name="las la-key" />
           </div>
           <p v-if="$store.state.keys.priv">
             Make sure you back up your private key!

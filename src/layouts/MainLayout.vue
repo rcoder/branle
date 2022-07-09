@@ -3,18 +3,19 @@
     <div class="flex">
       <div class="hidden sm:flex w-1/4 justify-center px-8">
         <q-card flat no-box-shadow class="text-xl bg-inherit">
-          <q-card-section class="flex justify-center">
+          <q-card-section class="flex justify-left">
             <q-img
               :src="icon"
               fit="scale-down"
-              width="80px"
+              width="64px" style="margin-right: 0.5em;"
               @click="$router.push('/')"
             />
+            <h2 style="margin-top: 64px;"><code>{{info.siteName}}</code></h2>
           </q-card-section>
-          <q-list class="text-slate-700">
-            <q-item v-ripple clickable to="/" active-class="">
+          <q-list class="text-slate-700" style="max-width: 200px;" dark dense>
+            <q-item clickable to="/" active-class="">
               <q-item-section avatar>
-                <q-icon name="home" color="secondary" />
+                <q-icon name="las la-home" color="secondary" />
               </q-item-section>
 
               <q-item-section
@@ -26,9 +27,9 @@
               </q-item-section>
             </q-item>
 
-            <q-item v-ripple clickable to="/notifications" active-class="">
+            <q-item clickable to="/notifications" active-class="">
               <q-item-section avatar>
-                <q-icon name="notifications" color="secondary" />
+                <q-icon name="las la-bell" color="secondary" />
               </q-item-section>
 
               <q-item-section
@@ -49,13 +50,12 @@
 
             <q-item
               v-if="$store.getters.canEncryptDecrypt"
-              v-ripple
               clickable
               to="/messages"
               active-class=""
             >
               <q-item-section avatar>
-                <q-icon name="email" color="secondary" />
+                <q-icon name="las la-inbox" color="secondary" />
               </q-item-section>
 
               <q-item-section
@@ -75,13 +75,12 @@
             </q-item>
 
             <q-item
-              v-ripple
               clickable
               :to="'/' + $store.state.keys.pub"
               active-class=""
             >
               <q-item-section avatar>
-                <q-icon name="person" color="secondary" />
+                <q-icon name="las la-user" color="secondary" />
               </q-item-section>
 
               <q-item-section
@@ -96,14 +95,13 @@
             </q-item>
 
             <q-item
-              v-ripple
               clickable
               to="/follow"
               active-class=""
               class="lg:hidden"
             >
               <q-item-section avatar>
-                <q-icon name="manage_search" color="secondary" />
+                <q-icon name="las la-search" color="secondary" />
               </q-item-section>
 
               <q-item-section
@@ -115,9 +113,9 @@
               </q-item-section>
             </q-item>
 
-            <q-item v-ripple clickable to="/settings" active-class="">
+            <q-item clickable to="/settings" active-class="">
               <q-item-section avatar>
-                <q-icon name="settings" color="secondary" />
+                <q-icon name="las la-tools" color="secondary" />
               </q-item-section>
 
               <q-item-section
@@ -146,16 +144,16 @@
       active-class="px-0"
     >
       <q-route-tab
-        icon="home"
+        icon="las la-home"
         to="/"
-        active-class=""
-        :class="{'text-primary': $route.name === 'home'}"
+        active-class="bg-secondary"
+        :class="{'text-dark': $route.name === 'home'}"
       />
       <q-route-tab
-        icon="notifications"
+        icon="las la-bell"
         to="/notifications"
-        active-class=""
-        :class="{'text-primary': $route.name === 'notifications'}"
+        active-class="bg-secondary"
+        :class="{'text-dark': $route.name === 'notifications'}"
       >
         <q-badge
           v-if="$store.state.unreadNotifications"
@@ -168,10 +166,10 @@
       </q-route-tab>
       <q-route-tab
         v-if="$store.getters.canEncryptDecrypt"
-        icon="email"
+        icon="las la-inbox"
         to="/messages"
-        active-class=""
-        :class="{'text-primary': $route.name === 'messages'}"
+        active-class="bg-secondary"
+        :class="{'text-dark': $route.name === 'messages'}"
       >
         <q-badge
           v-if="$store.getters.unreadChats"
@@ -183,26 +181,26 @@
         </q-badge>
       </q-route-tab>
       <q-route-tab
-        icon="person"
+        icon="las la-user"
         :to="'/' + $store.state.keys.pub"
-        active-class=""
+        active-class="bg-secondary"
         :class="{
-          'text-primary':
+          'text-dark':
             $route.name === 'profile' &&
             $route.params.pubkey === $store.state.keys.pub
         }"
       />
       <q-route-tab
-        icon="manage_search"
+        icon="las la-search"
         to="/follow"
-        active-class=""
-        :class="{'text-primary': $route.name === 'follow'}"
+        active-class="bg-secondary"
+        :class="{'text-dark': $route.name === 'follow'}"
       />
       <q-route-tab
-        icon="settings"
+        icon="las la-tools"
         to="/settings"
-        active-class=""
-        :class="{'text-primary': $route.name === 'settings'}"
+        active-class="bg-secondary"
+        :class="{'text-dark': $route.name === 'settings'}"
       />
     </q-tabs>
 
@@ -255,6 +253,7 @@
 import helpersMixin from '../utils/mixin'
 import {validateWords} from 'nostr-tools/nip06'
 import {generatePrivateKey} from 'nostr-tools'
+import {info} from '../site-info'
 
 export default {
   name: 'MainLayout',
@@ -265,7 +264,8 @@ export default {
       initializeKeys: true,
       watchOnly: false,
       key: null,
-      hasExtension: false
+      hasExtension: false,
+      info,
     }
   },
 

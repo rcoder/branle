@@ -13,8 +13,8 @@
         >
           <template #before>
             <q-avatar
-              round
-              size="60px"
+              rounded
+              size="48px"
               class="cursor-pointer mr-4"
               @click="toProfile($store.state.keys.pub)"
             >
@@ -26,7 +26,6 @@
           <q-btn
             v-close-popup
             label="Publish"
-            rounded
             unelevated
             type="submit"
             color="primary"

@@ -3,6 +3,7 @@
     <div v-if="$store.getters.hasName($store.state.keys.pub)" class="text-xl">Hello <Name :pubkey="$store.state.keys.pub" /></div>
     <div v-else class="text-xl">Home</div>
 
+    <q-separator/>
     <Publish />
 
     <q-infinite-scroll :disable="reachedEnd" :offset="150" @load="loadMore">

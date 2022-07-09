@@ -15,7 +15,7 @@
     <div ref="main" class="py-4 px-1">
       <div v-if="event">
         <div class="flex items-center">
-          <q-avatar
+          <q-avatar rounded
             class="no-shadow cursor-pointer"
             @click="toProfile(event.pubkey)"
           >
@@ -25,7 +25,7 @@
             <Name :pubkey="event.pubkey" />
           </div>
           <div class="text-accent font-mono ml-4">
-            {{ shorten(event.pubkey) }}
+            <abbr :title=event.pubkey>{{ shorten(event.pubkey) }}</abbr>
           </div>
         </div>
         <div
@@ -37,7 +37,7 @@
         <div class="flex items-center justify-between w-full">
           <q-icon
             size="xs"
-            name="info"
+            name="las las-info-circle"
             class="opacity-50 cursor-pointer mr-1"
             @click="metadataDialog = true"
           />
@@ -52,7 +52,7 @@
             unelevated
             flat
             :color="replying ? 'secondary' : 'primary'"
-            icon="quickreply"
+            icon="las la-comment-dots"
             size="lg"
             @click="replying = !replying"
           />

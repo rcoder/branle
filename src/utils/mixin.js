@@ -58,7 +58,7 @@ export default {
               <div class="inline-flex items-center">
                 <div class="text-secondary mr-2">${item.string}</div>
                 ${item.original.value.nip05
-                  ? '<i class="notranslate material-icons text-accent mr-1 -ml-1" aria-hidden="true" role="presentation">verified</i>'
+                  ? '<i class="notranslate line-awesome text-accent mr-1 -ml-1" aria-hidden="true" role="presentation">verified</i>'
                   : ''}
               </div>
               <div class="text-accent font-mono text-xs">${shorten(item.original.value.pubkey)}</div>

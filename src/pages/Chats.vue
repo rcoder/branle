@@ -1,6 +1,7 @@
 <template>
   <q-page class="px-4 py-6">
     <div class="text-xl">Encrypted Chat</div>
+    <q-separator/>
 
     <q-list v-if="chats.length" class="my-4">
       <q-item
@@ -11,7 +12,7 @@
         :to="'/messages/' + chat.peer"
       >
         <q-item-section avatar>
-          <q-avatar round>
+          <q-avatar rounded>
             <img :src="$store.getters.avatar(chat.peer)" />
           </q-avatar>
 
@@ -36,7 +37,7 @@
     <div v-else class="m-8 text-base">
       <p>
         Start a chat by clicking at the
-        <q-icon unelevated color="primary" name="message" size="md" /> icon on
+        <q-icon unelevated color="primary" name="las la-sms" size="md" /> icon on
         someone's profile page.
       </p>
     </div>

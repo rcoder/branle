@@ -29,8 +29,10 @@ module.exports = configure(function (ctx) {
     // https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-css
     css: [
       'add-tailwind.css',
+      'global.css',
       '../../node_modules/highlight.js/styles/base16/solarized-light.css',
-      '../../node_modules/tributejs/tribute.css'
+      '../../node_modules/tributejs/tribute.css',
+      '../../node_modules/@ibm/plex/css/ibm-plex.css',
     ],
 
     // https://github.com/quasarframework/quasar/tree/dev/extras
@@ -42,9 +44,8 @@ module.exports = configure(function (ctx) {
       // 'themify',
       // 'line-awesome',
       // 'roboto-font-latin-ext', // this or either 'roboto-font', NEVER both!
-
-      'roboto-font', // optional, you are not bound to it
-      'material-icons' // optional, you are not bound to it
+      // 'roboto-font', // optional, you are not bound to it
+      'line-awesome'
     ],
 
     // Full list of options: https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-build
@@ -109,6 +110,7 @@ module.exports = configure(function (ctx) {
       },
 
       // iconSet: 'material-icons', // Quasar icon set
+      iconSet: 'line-awesome',
       // lang: 'en-US', // Quasar language pack
 
       // For special cases outside of where the auto-import strategy can have an impact

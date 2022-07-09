@@ -1,16 +1,19 @@
 <template>
   <q-page class="px-4 py-6">
     <div class="text-xl text-center">
-      <Name :pubkey="$route.params.pubkey" />
+      <Name :pubkey="$route.params.pubkey" fallback />
     </div>
+    <q-separator/>
 
     <div class="flex justify-left items-center mt-4">
-      <q-avatar round>
+      <q-avatar rounded>
         <img :src="$store.getters.avatar($route.params.pubkey)" />
       </q-avatar>
       <div class="ml-4" style="width: 29rem">
         <p class="mb-1 break-all text-xs font-mono text-secondary">
-          {{ $route.params.pubkey }}
+          <abbr :title=$route.params.pubkey>
+              {{ shorten($route.params.pubkey) }}
+          </abbr>
         </p>
         <div class="text-accent text-base break-words w-full">
           <Markdown>
@@ -35,10 +38,11 @@
               )"
               :key="user.pubkey"
             >
-              <span
-                class="text-accent cursor-pointer hover:underline"
+              <abbr
+                :title=user.pubkey
+                class="text-accent cursor-pointer"
                 @click="toProfile(user.pubkey)"
-                >{{ shorten(user.pubkey) }}</span
+                >{{ shorten(user.pubkey) }}</abbr
               ><span
                 v-if="$store.getters.hasName(user.pubkey)"
                 class="text-primary"
@@ -57,7 +61,7 @@
             </span>
             <q-icon
               v-if="$store.getters.hasMoreContacts($route.params.pubkey)"
-              :name="showAllContacts ? 'expand_less' : 'more_horiz'"
+              :name="showAllContacts ? 'las la-compress' : 'las la-ellipsis-v'"
               color="primary"
               class="
                 bg-white
@@ -78,33 +82,33 @@
       <div class="flex justify-end">
         <q-btn
           :disable="!$store.getters.canEncryptDecrypt"
-          round
+          rounded
           flat
           :to="'/messages/' + $route.params.pubkey"
           unelevated
           color="primary"
-          icon="message"
+          icon="las la-envelope"
           size="xl"
         />
         <q-btn
           v-if="isFollowing"
           :disable="!$store.getters.canSignEventsAutomatically"
-          round
+          rounded
           unelevated
           flat
           color="secondary"
-          icon="cancel"
+          icon="las la-minus-square"
           size="xl"
           @click="unfollow"
         />
         <q-btn
           v-if="!isFollowing"
           :disable="!$store.getters.canSignEventsAutomatically"
-          round
+          rounded
           unelevated
           color="primary"
           flat
-          icon="add_circle"
+          icon="las la-plus-square"
           size="xl"
           @click="follow"
         />

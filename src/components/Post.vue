@@ -15,7 +15,7 @@
   >
     <q-item-section avatar style="height: 100%">
       <div v-if="showVerticalLineTop" class="is-reply"></div>
-      <q-avatar
+      <q-avatar rounded
         class="no-shadow cursor-pointer"
         @click="toProfile(event.pubkey)"
       >
@@ -35,7 +35,7 @@
         <div class="flex items-center">
           <q-icon
             size="xs"
-            name="info"
+            name="las la-info-circle"
             class="opacity-50 cursor-pointer mr-2"
             @click="metadataDialog = true"
           />

@@ -6,12 +6,12 @@
           <q-input
             v-model="searchingProfile"
             filled
-            label="Search a Profile"
+            label="Find Profiles"
             clearable
           >
             <template #append>
               <q-btn
-                icon="search"
+                icon="las la-search"
                 type="submit"
                 color="primary"
                 class="ml-3"
