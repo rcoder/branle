@@ -14,7 +14,7 @@
           <template #before>
             <q-avatar
               rounded
-              size="48px"
+              size="64px"
               class="cursor-pointer mr-4"
               @click="toProfile($store.state.keys.pub)"
             >

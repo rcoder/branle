@@ -6,7 +6,7 @@
     <q-separator/>
 
     <div class="flex justify-left items-center mt-4">
-      <q-avatar rounded>
+      <q-avatar size="64px" rounded>
         <img :src="$store.getters.avatar($route.params.pubkey)" />
       </q-avatar>
       <div class="ml-4" style="width: 29rem">

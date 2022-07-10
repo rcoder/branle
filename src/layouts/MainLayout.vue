@@ -10,7 +10,7 @@
               width="64px" style="margin-right: 0.5em;"
               @click="$router.push('/')"
             />
-            <h2 style="margin-top: 64px;"><code>{{info.siteName}}</code></h2>
+            <h2 style="margin-top: 64px;"><code>{{siteName}}</code></h2>
           </q-card-section>
           <q-list class="text-slate-700" style="max-width: 200px;" dark dense>
             <q-item clickable to="/" active-class="">
@@ -253,7 +253,7 @@
 import helpersMixin from '../utils/mixin'
 import {validateWords} from 'nostr-tools/nip06'
 import {generatePrivateKey} from 'nostr-tools'
-import {info} from '../site-info'
+import {siteName} from '../site-info'
 
 export default {
   name: 'MainLayout',
@@ -265,7 +265,7 @@ export default {
       watchOnly: false,
       key: null,
       hasExtension: false,
-      info,
+      siteName,
     }
   },
 
