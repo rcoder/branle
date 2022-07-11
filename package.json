@@ -8,7 +8,7 @@
     "lint": "eslint --ext .js,.vue ./",
     "dev": "quasar dev --port 3001",
     "build": "rm -rf dist/spa && quasar build -m spa",
-    "publish": "rm -rf dist/spa && quasar build && netlify deploy --dir=dist/spa/ --prod",
+    "push-live": "rm -rf dist/spa && quasar build && pushd dist/spa && rsync -avz . rants.pub:/var/www/rants.pub",
     "docker:build": "docker build -t branle .",
     "docker:run": "docker run -d -p 8080:80 --name branle --restart always branle",
     "docker:stop": "docker stop branle"

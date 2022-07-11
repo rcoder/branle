@@ -2,26 +2,34 @@ import {LocalStorage} from 'quasar'
 
 const isClientUsingTor = () => window.location.hostname.endsWith('.onion')
 
-const getMainnetRelays = () => {
+const Policy = {
+    RW: {read: true, write: true},
+    RO: {read: true, write: false},
+    WO: {read: false, write: true},
+}
+
+const getMainnetRelays = (extra = 3) => {
   const relays = {
-    'wss://relay.damus.io': {read: true, write: true},
-    'wss://nostr-pub.wellorder.net': {read: true, write: true},
-    'wss://nostr-verified.wellorder.net': {read: true, write: false},
-    'wss://expensive-relay.fiatjaf.com': {read: true, write: false},
-    'wss://nostr-sandbox.minds.io/nostr/v1/ws': {read: true, write: false}
+    'wss://relay.rants.pub': Policy.RW,
   }
+
   const optional = [
-    ['wss://nostr.rocks', {read: true, write: true}],
-    ['wss://relay.damus.io', {read: true, write: true}],
-    ['wss://nostr.onsats.org', {read: true, write: true}],
-    ['wss://nostr-relay.untethr.me	', {read: true, write: true}],
-    ['wss://nostr-relay.wlvs.space', {read: true, write: true}],
-    ['wss://nostr.bitcoiner.social', {read: true, write: true}],
-    ['wss://nostr.openchain.fr', {read: true, write: true}],
-    ['wss://nostr.drss.io', {read: true, write: true}]
+    ['wss://relay.damus.io', Policy.RW],
+    ['wss://nostr-pub.wellorder.net', Policy.RW],
+    ['wss://nostr-verified.wellorder.net', Policy.RO],
+    ['wss://expensive-relay.fiatjaf.com', Policy.RO],
+    ['wss://nostr-sandbox.minds.io/nostr/v1/ws', Policy.RO],
+    ['wss://nostr.rocks', Policy.RW],
+    ['wss://relay.damus.io', Policy.RW],
+    ['wss://nostr.onsats.org', Policy.RW],
+    ['wss://nostr-relay.untethr.me', Policy.RW],
+    ['wss://nostr-relay.wlvs.space', Policy.RW],
+    ['wss://nostr.bitcoiner.social', Policy.RW],
+    ['wss://nostr.openchain.fr', Policy.RW],
+    ['wss://nostr.drss.io', Policy.RW],
   ]
 
-  for (let i = 0; i < 3; i++) {
+  for (let i = 0; i < Math.min(extra, optional.length); i++) {
     let pick = parseInt(Math.random() * optional.length)
     let [url, prefs] = optional[pick]
     relays[url] = prefs
@@ -39,7 +47,7 @@ const getTorRelays = () => ({
 })
 
 export default function () {
-  const relays = isClientUsingTor() ? getTorRelays() : getMainnetRelays()
+  const relays = isClientUsingTor() ? getTorRelays() : getMainnetRelays(0)
 
   return {
     keys: LocalStorage.getItem('keys') || {}, // {priv, pub }
