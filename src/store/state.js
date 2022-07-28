@@ -14,7 +14,6 @@ const getMainnetRelays = (extra = 3) => {
   }
 
   const optional = [
-    ['wss://relay.damus.io', Policy.RW],
     ['wss://nostr-pub.wellorder.net', Policy.RW],
     ['wss://nostr-verified.wellorder.net', Policy.RO],
     ['wss://expensive-relay.fiatjaf.com', Policy.RO],
@@ -27,6 +26,14 @@ const getMainnetRelays = (extra = 3) => {
     ['wss://nostr.bitcoiner.social', Policy.RW],
     ['wss://nostr.openchain.fr', Policy.RW],
     ['wss://nostr.drss.io', Policy.RW],
+    ['wss://nostr.rocks', {read: true, write: true}],
+    ['wss://relay.damus.io', {read: true, write: true}],
+    ['wss://nostr.onsats.org', {read: true, write: true}],
+    ['wss://nostr-relay.untethr.me	', {read: true, write: true}],
+    ['wss://nostr-relay.wlvs.space', {read: true, write: true}],
+    ['wss://nostr.bitcoiner.social', {read: true, write: true}],
+    ['wss://nostr.openchain.fr', {read: true, write: true}],
+    ['wss://nostr.drss.io', {read: true, write: true}]
   ]
 
   for (let i = 0; i < Math.min(extra, optional.length); i++) {
@@ -60,9 +67,6 @@ export default function () {
     contactListCache: {}, // { [pubkey]: {name, about, picture, ...} }
     contactListCacheLRU: [], // [ pubkeys... ]
     nip05VerificationCache: {}, // { [identifier]: {pubkey, when }
-
-    lastMessageRead: LocalStorage.getItem('lastMessageRead') || {},
-    unreadMessages: {},
 
     lastNotificationRead: LocalStorage.getItem('lastNotificationRead') || 0,
     unreadNotifications: 0

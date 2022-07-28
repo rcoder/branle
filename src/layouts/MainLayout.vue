@@ -49,32 +49,6 @@
             </q-item>
 
             <q-item
-              v-if="$store.getters.canEncryptDecrypt"
-              clickable
-              to="/messages"
-              active-class=""
-            >
-              <q-item-section avatar>
-                <q-icon name="las la-inbox" color="secondary" />
-              </q-item-section>
-
-              <q-item-section
-                :class="{'text-primary': $route.name === 'messages'}"
-              >
-                Messages
-
-                <q-badge
-                  v-if="$store.getters.unreadChats"
-                  color="primary"
-                  floating
-                  transparent
-                >
-                  {{ $store.getters.unreadChats }}
-                </q-badge>
-              </q-item-section>
-            </q-item>
-
-            <q-item
               clickable
               :to="'/' + $store.state.keys.pub"
               active-class=""
@@ -162,22 +136,6 @@
           transparent
         >
           {{ $store.state.unreadNotifications }}
-        </q-badge>
-      </q-route-tab>
-      <q-route-tab
-        v-if="$store.getters.canEncryptDecrypt"
-        icon="las la-inbox"
-        to="/messages"
-        active-class="bg-secondary"
-        :class="{'text-dark': $route.name === 'messages'}"
-      >
-        <q-badge
-          v-if="$store.getters.unreadChats"
-          color="primary"
-          floating
-          transparent
-        >
-          {{ $store.getters.unreadChats }}
         </q-badge>
       </q-route-tab>
       <q-route-tab
